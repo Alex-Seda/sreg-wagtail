@@ -1,1 +1,16 @@
-venv/*
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Node
+node_modules/
+
+# Django
+static/
+staticfiles/
+.env
+
+# Database
+db.sqlite3
+media/
