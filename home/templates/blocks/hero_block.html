@@ -1,0 +1,20 @@
+{% load wagtailimages_tags %}
+{% image value.image fill-1920x1100 format-webp as bg %}
+<section class="relative isolate flex min-h-[80svh] items-end overflow-hidden bg-umber-900 text-linen-50">
+  <img src="{{ bg.url }}" width="{{ bg.width }}" height="{{ bg.height }}" alt="" fetchpriority="high"
+       class="absolute inset-0 -z-20 h-full w-full object-cover">
+  <div class="absolute inset-0 -z-10 bg-linear-to-t from-umber-900/85 via-umber-900/40 to-umber-900/10"></div>
+
+  <div class="wrap w-full pb-16 pt-40 md:pb-24">
+    <div class="max-w-3xl{% if value.text_position == 'center' %} mx-auto text-center{% endif %}">
+      <h1 class="heading-xl">{{ value.heading }}</h1>
+      {% if value.subheading %}
+        <p class="mt-6 max-w-xl text-lg leading-8 text-linen-100{% if value.text_position == 'center' %} mx-auto{% endif %}">{{ value.subheading }}</p>
+      {% endif %}
+      <div class="mt-10 flex flex-wrap gap-4{% if value.text_position == 'center' %} justify-center{% endif %}">
+        {% include "includes/button.html" with link=value.primary_cta variant="light" %}
+        {% include "includes/button.html" with link=value.secondary_cta variant="outline-light" %}
+      </div>
+    </div>
+  </div>
+</section>

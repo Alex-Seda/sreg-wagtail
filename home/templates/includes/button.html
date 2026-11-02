@@ -1,0 +1,5 @@
+{% load wagtailcore_tags %}{% comment %}
+  Usage: {% include "includes/button.html" with link=value.cta variant="solid" %}
+  variants: solid (default), outline, light, outline-light
+  Renders nothing when link.label is empty.
+{% endcomment %}{% if link.label %}{% if link.page %}{% pageurl link.page as btn_href %}{% else %}{% firstof link.url "#" as btn_href %}{% endif %}<a href="{{ btn_href }}" class="inline-flex items-center justify-center px-7 py-3.5 text-sm font-medium transition-colors {% if variant == 'light' %}bg-linen-50 text-umber-900 hover:bg-sand-200{% elif variant == 'outline-light' %}border border-linen-50 text-linen-50 hover:bg-linen-50 hover:text-umber-900{% elif variant == 'outline' %}border border-umber-900 text-umber-900 hover:bg-umber-900 hover:text-linen-50{% else %}bg-umber-900 text-linen-50 hover:bg-umber-700{% endif %}">{{ link.label }}</a>{% endif %}

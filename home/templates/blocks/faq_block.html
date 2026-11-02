@@ -1,0 +1,19 @@
+<section class="py-20 md:py-28{% if value.background == 'sand' %} bg-linen-100{% endif %}">
+  <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+    <h2 class="heading-lg lg:col-span-4">{{ value.heading }}</h2>
+
+    <div class="border-t border-taupe-400/60 lg:col-span-8">
+      {% for item in value.items %}
+        <details class="group border-b border-taupe-400/60">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-6 font-display text-2xl font-medium [&::-webkit-details-marker]:hidden">
+            {{ item.question }}
+            <svg class="size-5 shrink-0 transition-transform group-open:rotate-45" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path d="M10 3v14M3 10h14"/>
+            </svg>
+          </summary>
+          <div class="rich-text max-w-prose pb-8 text-umber-700">{{ item.answer }}</div>
+        </details>
+      {% endfor %}
+    </div>
+  </div>
+</section>

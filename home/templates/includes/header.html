@@ -1,0 +1,32 @@
+{% load wagtailcore_tags %}
+{% wagtail_site as current_site %}
+{% with s=settings.home.SiteSettings %}
+<header class="border-b border-sand-200 bg-linen-50">
+  <div class="wrap flex items-center justify-between gap-6 py-5">
+    <a href="/" class="font-display text-2xl font-semibold tracking-tight md:text-3xl">{{ s.business_name }}</a>
+
+    <nav aria-label="Main" class="hidden items-center gap-8 md:flex">
+      {% for item in current_site.root_page.get_children.live.in_menu %}
+        {% pageurl item as item_url %}
+        <a href="{{ item_url }}" class="text-sm font-medium underline-offset-4 hover:underline"{% if request.path == item_url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+      {% endfor %}
+      {% if s.phone %}
+        <a href="tel:{{ s.phone }}" class="bg-umber-900 px-5 py-2.5 text-sm font-medium text-linen-50 transition-colors hover:bg-umber-700">{{ s.phone }}</a>
+      {% endif %}
+    </nav>
+
+    <details class="relative md:hidden">
+      <summary class="cursor-pointer list-none px-3 py-2 text-sm font-medium [&::-webkit-details-marker]:hidden">Menu</summary>
+      <nav aria-label="Mobile" class="absolute right-0 top-full z-20 mt-3 flex w-64 flex-col gap-1 border border-sand-200 bg-linen-50 p-3">
+        {% for item in current_site.root_page.get_children.live.in_menu %}
+          {% pageurl item as item_url %}
+          <a href="{{ item_url }}" class="px-3 py-3 text-base font-medium hover:bg-linen-100"{% if request.path == item_url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+        {% endfor %}
+        {% if s.phone %}
+          <a href="tel:{{ s.phone }}" class="mt-2 bg-umber-900 px-3 py-3 text-center text-base font-medium text-linen-50">Call {{ s.phone }}</a>
+        {% endif %}
+      </nav>
+    </details>
+  </div>
+</header>
+{% endwith %}

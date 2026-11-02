@@ -1,0 +1,10 @@
+<section class="py-20 md:py-28{% if value.background == 'sand' %} bg-linen-100{% endif %}">
+  <div class="wrap">
+    <div class="max-w-4xl font-display text-3xl font-medium leading-snug md:text-5xl md:leading-tight [&_p+p]:mt-6">
+      {{ value.body }}
+    </div>
+    {% if value.link.label %}
+      <div class="mt-10">{% include "includes/button.html" with link=value.link variant="outline" %}</div>
+    {% endif %}
+  </div>
+</section>

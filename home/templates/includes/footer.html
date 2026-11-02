@@ -1,0 +1,31 @@
+{% with s=settings.home.SiteSettings %}
+<footer class="bg-umber-900 text-linen-100">
+  <div class="wrap grid gap-12 py-16 md:grid-cols-3">
+    <div>
+      <p class="font-display text-3xl font-semibold text-linen-50">{{ s.business_name }}</p>
+      {% if s.license_info %}<p class="mt-4 max-w-xs text-sm leading-6 text-sand-200">{{ s.license_info|linebreaksbr }}</p>{% endif %}
+    </div>
+
+    <div class="text-sm leading-7">
+      <h2 class="font-display text-xl font-semibold text-linen-50">Contact</h2>
+      {% if s.address %}<address class="mt-3 not-italic">{{ s.address|linebreaksbr }}</address>{% endif %}
+      {% if s.phone %}<p><a href="tel:{{ s.phone }}" class="underline underline-offset-4 hover:text-linen-50">{{ s.phone }}</a></p>{% endif %}
+      {% if s.email %}<p><a href="mailto:{{ s.email }}" class="underline underline-offset-4 hover:text-linen-50">{{ s.email }}</a></p>{% endif %}
+    </div>
+
+    {% if s.facebook or s.instagram or s.linkedin %}
+    <div class="text-sm leading-7">
+      <h2 class="font-display text-xl font-semibold text-linen-50">Follow us</h2>
+      <ul class="mt-3">
+        {% if s.facebook %}<li><a href="{{ s.facebook }}" rel="noopener" class="underline underline-offset-4 hover:text-linen-50">Facebook</a></li>{% endif %}
+        {% if s.instagram %}<li><a href="{{ s.instagram }}" rel="noopener" class="underline underline-offset-4 hover:text-linen-50">Instagram</a></li>{% endif %}
+        {% if s.linkedin %}<li><a href="{{ s.linkedin }}" rel="noopener" class="underline underline-offset-4 hover:text-linen-50">LinkedIn</a></li>{% endif %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+  <div class="border-t border-umber-700">
+    <p class="wrap py-6 text-xs text-sand-200">&copy; {% now "Y" %} {{ s.business_name }}. All rights reserved.</p>
+  </div>
+</footer>
+{% endwith %}

@@ -1,0 +1,28 @@
+{% load wagtailcore_tags %}
+<section class="py-20 md:py-28{% if value.background == 'sand' %} bg-linen-100{% endif %}">
+  <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
+    <div class="lg:col-span-4">
+      <div class="lg:sticky lg:top-12">
+        <h2 class="heading-lg">{{ value.heading }}</h2>
+        {% if value.intro %}<p class="mt-5 text-lg leading-8 text-umber-700">{{ value.intro }}</p>{% endif %}
+      </div>
+    </div>
+
+    <ul class="divide-y divide-taupe-400/60 border-y border-taupe-400/60 lg:col-span-8">
+      {% for item in value.items %}
+        <li class="grid gap-3 py-8 md:grid-cols-5 md:gap-8">
+          <h3 class="font-display text-3xl font-medium md:col-span-2">{{ item.title }}</h3>
+          <div class="md:col-span-3">
+            <p class="leading-7 text-umber-700">{{ item.description }}</p>
+            {% if item.link.label %}
+              <p class="mt-4">
+                <a href="{% if item.link.page %}{% pageurl item.link.page %}{% else %}{{ item.link.url|default:'#' }}{% endif %}"
+                   class="text-sm font-medium underline underline-offset-4 hover:text-umber-700">{{ item.link.label }}</a>
+              </p>
+            {% endif %}
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
