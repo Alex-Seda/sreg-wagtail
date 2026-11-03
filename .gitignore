@@ -9,6 +9,9 @@ node_modules/
 # Django
 static/
 staticfiles/
+!mysite/static/
+!mysite/static/css/
+!mysite/static/css/main.css
 .env
 
 # Database

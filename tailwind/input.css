@@ -1,16 +1,56 @@
 @import "tailwindcss";
 
-@theme{
+@theme {
   --font-sans: 'Montserrat', ui-sans-serif, system-ui;
-  
-  --color-c_dark_purple: #420264;
-  --color-c_gray: #a1a2a4;
-  --color-c_red: #aa0000;
-  --color-c_yellow: #ffd62e;
-  --color-primary: #5D1982;
-  --color-c_purple: #8F44B8;
-  --color-c_light_purple: #CD6FFF;
-  --color-c_faint_purple: #EBC5FF;
-  --color-c_bg_purple: #F6E5FF;
-  --color-c_transparent_purple: #F7E8FF;
+  --font-display: 'Cormorant Garamond', ui-serif, Georgia, serif;
+
+  --color-umber-700: #5a4940;
+  --color-umber-900: #2f241f;
+  --color-sand-200: #e7dccb;
+  --color-linen-50: #fbfaf7;
+  --color-linen-100: #f3eee6;
+  --color-taupe-400: #a69b90;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('../fonts/CormorantGaramond-VariableFont_wght.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@utility wrap {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 768px) {
+    padding-inline: 2rem;
+  }
+}
+
+@utility heading-xl {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 7vw, 6rem);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.025em;
+}
+
+@utility heading-lg {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.025em;
 }

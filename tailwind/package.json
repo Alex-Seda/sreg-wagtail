@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cd .. && tailwind/node_modules/.bin/tailwindcss -i tailwind/input.css -o static/css/main.css",
-    "watch": "cd .. && tailwind/node_modules/.bin/tailwindcss -i tailwind/input.css -o static/css/main.css --watch",
+    "build": "cd .. && tailwind/node_modules/.bin/tailwindcss -i tailwind/input.css -o mysite/static/css/main.css",
+    "watch": "cd .. && tailwind/node_modules/.bin/tailwindcss -i tailwind/input.css -o mysite/static/css/main.css --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
