@@ -272,3 +272,29 @@ class HomeStreamBlock(blocks.StreamBlock):
 
     class Meta:
         block_counts = {"hero": {"max_num": 1}}
+
+
+class StandardStreamBlock(blocks.StreamBlock):
+    hero = HeroBlock()
+    statement = StatementBlock()
+    image_text = ImageTextBlock()
+    testimonials = TestimonialsBlock()
+    faq = FAQBlock()
+    video = VideoBlock()
+    rich_text = RichTextSectionBlock()
+    cta = CTABlock()
+
+
+class ServiceStreamBlock(blocks.StreamBlock):
+    hero = HeroBlock()
+    statement = StatementBlock()
+    image_text = ImageTextBlock()
+    services = ServicesBlock()
+    testimonials = TestimonialsBlock()
+    faq = FAQBlock()
+    video = VideoBlock()
+    rich_text = RichTextSectionBlock()
+    cta = CTABlock()
+
+    class Meta:
+        block_counts = {"hero": {"max_num": 1}}

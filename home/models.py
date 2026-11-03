@@ -4,7 +4,7 @@ from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import StreamField
 from wagtail.models import Page
 
-from .blocks import HomeStreamBlock
+from .blocks import HomeStreamBlock, ServiceStreamBlock, StandardStreamBlock
 
 
 class HomePage(Page):
@@ -12,6 +12,24 @@ class HomePage(Page):
 
     max_count = 1
     parent_page_types = ["wagtailcore.Page"]
+
+    content_panels = Page.content_panels + [FieldPanel("body")]
+
+
+class StandardPage(Page):
+    body = StreamField(StandardStreamBlock(), blank=True)
+
+    parent_page_types = ["home.HomePage", "home.StandardPage"]
+    subpage_types = ["home.StandardPage", "home.ServicePage"]
+
+    content_panels = Page.content_panels + [FieldPanel("body")]
+
+
+class ServicePage(Page):
+    body = StreamField(ServiceStreamBlock(), blank=True)
+
+    parent_page_types = ["home.HomePage", "home.StandardPage"]
+    subpage_types = []
 
     content_panels = Page.content_panels + [FieldPanel("body")]
 

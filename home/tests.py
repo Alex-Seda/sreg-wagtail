@@ -1,4 +1,4 @@
-from home.models import HomePage
+from home.models import HomePage, ServicePage, StandardPage
 
 from wagtail.models import Page, Site
 from wagtail.test.utils import WagtailPageTestCase
@@ -40,3 +40,31 @@ class HomeTests(WagtailPageTestCase):
     def test_homepage_template_used(self):
         response = self.client.get(self.homepage.url)
         self.assertTemplateUsed(response, "home/home_page.html")
+
+
+class ContentPageTests(WagtailPageTestCase):
+    def setUp(self):
+        root_page = Page.get_first_root_node()
+        Site.objects.create(hostname="testsite", root_page=root_page, is_default_site=True)
+        self.homepage = HomePage(title="Home")
+        root_page.add_child(instance=self.homepage)
+
+    def test_standard_page_can_be_created_under_homepage(self):
+        page = StandardPage(title="About Us")
+        self.homepage.add_child(instance=page)
+
+        self.assertPageIsRenderable(page)
+        self.assertTemplateUsed(self.client.get(page.url), "home/standard_page.html")
+
+    def test_service_page_can_be_created_under_homepage(self):
+        page = ServicePage(title="Move Coordination")
+        self.homepage.add_child(instance=page)
+
+        self.assertPageIsRenderable(page)
+        self.assertTemplateUsed(self.client.get(page.url), "home/service_page.html")
+
+    def test_service_page_cannot_have_children(self):
+        page = ServicePage(title="Move Coordination")
+        self.homepage.add_child(instance=page)
+
+        self.assertEqual(page.allowed_subpage_models(), [])
