@@ -1,6 +1,7 @@
+{% load wagtailimages_tags %}
 {% with s=settings.home.SiteSettings %}
 <footer class="bg-umber-900 text-linen-100">
-  <div class="wrap grid gap-12 py-16 md:grid-cols-3">
+  <div class="wrap grid gap-8 py-12 md:grid-cols-4 md:gap-10">
     <div>
       <p class="font-display text-3xl font-semibold text-linen-50">{{ s.business_name }}</p>
       {% if s.license_info %}<p class="mt-4 max-w-xs text-sm leading-6 text-sand-200">{{ s.license_info|linebreaksbr }}</p>{% endif %}
@@ -10,8 +11,21 @@
       <h2 class="font-display text-xl font-semibold text-linen-50">Contact</h2>
       {% if s.address %}<address class="mt-3 not-italic">{{ s.address|linebreaksbr }}</address>{% endif %}
       {% if s.phone %}<p><a href="tel:{{ s.phone }}" class="underline underline-offset-4 hover:text-linen-50">{{ s.phone }}</a></p>{% endif %}
-      {% if s.email %}<p><a href="mailto:{{ s.email }}" class="underline underline-offset-4 hover:text-linen-50">{{ s.email }}</a></p>{% endif %}
+      {% if s.email %}<p><a href="mailto:{{ s.email }}" class="underline underline-offset-4 hover:text-linen-50">{{ s.email }}</a></p>      {% endif %}
     </div>
+
+    {% if s.team_logo or s.broker_logo %}
+    <div class="flex flex-wrap items-start gap-6 md:gap-4">
+      {% if s.team_logo %}
+        {% image s.team_logo width-500 as team_logo %}
+        <img src="{{ team_logo.url }}" width="{{ team_logo.width }}" height="{{ team_logo.height }}" alt="Team logo" class="max-h-12 w-auto max-w-48 object-contain">
+      {% endif %}
+      {% if s.broker_logo %}
+        {% image s.broker_logo width-500 as broker_logo %}
+        <img src="{{ broker_logo.url }}" width="{{ broker_logo.width }}" height="{{ broker_logo.height }}" alt="Broker logo" class="max-h-12 w-auto max-w-48 object-contain">
+      {% endif %}
+    </div>
+    {% endif %}
 
     {% if s.facebook or s.instagram or s.linkedin or s.tiktok or s.youtube %}
     <div class="text-sm leading-7">

@@ -1,9 +1,16 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 {% wagtail_site as current_site %}
 {% with s=settings.home.SiteSettings %}
 <header class="border-b border-sand-200 bg-linen-50">
   <div class="wrap flex items-center justify-between gap-6 py-5">
-    <a href="/" class="font-display text-2xl font-semibold tracking-tight md:text-3xl">{{ s.business_name }}</a>
+    <a href="/" class="inline-flex items-center gap-3" aria-label="{{ s.business_name }} home">
+      {% if s.site_logo %}
+        {% image s.site_logo width-500 as logo %}
+        <img src="{{ logo.url }}" width="{{ logo.width }}" height="{{ logo.height }}" alt="{{ s.business_name }}" class="max-h-12 w-auto max-w-56 object-contain">
+      {% else %}
+        <span class="font-display text-2xl font-semibold tracking-tight md:text-3xl">{{ s.business_name }}</span>
+      {% endif %}
+    </a>
 
     <nav aria-label="Main" class="hidden items-center gap-8 md:flex">
       {% for item in current_site.root_page.get_children.live.in_menu %}

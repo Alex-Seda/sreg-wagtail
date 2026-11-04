@@ -69,4 +69,22 @@
   .rich-text li + li {
     margin-top: 0.5rem;
   }
+
+  .rich-text a {
+    color: var(--color-umber-700);
+    text-decoration-line: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .rich-text a:hover {
+    color: var(--color-umber-900);
+  }
+
+  .text-linen-50 .rich-text a {
+    color: var(--color-sand-200);
+  }
+
+  .text-linen-50 .rich-text a:hover {
+    color: var(--color-linen-50);
+  }
 }

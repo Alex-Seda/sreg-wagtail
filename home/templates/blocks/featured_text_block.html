@@ -9,7 +9,7 @@
         <div class="mx-auto max-w-4xl bg-linen-100 px-6 py-8 text-umber-900 md:px-12 md:py-12">
       {% endif %}
           {% if value.heading %}<h2 class="heading-lg">{{ value.heading }}</h2>{% endif %}
-          <div class="{% if value.heading %}mt-6 {% endif %}max-w-3xl text-lg leading-8 [&_p+p]:mt-5">{{ value.body }}</div>
+          <div class="{% if value.heading %}mt-6 {% endif %}rich-text max-w-3xl text-lg leading-8 [&_p+p]:mt-5">{{ value.body }}</div>
         </div>
     </div>
   </section>
@@ -24,7 +24,7 @@
         <div class="mx-auto max-w-3xl border-l-4 border-umber-900 bg-linen-100 px-6 py-6 text-umber-900 md:px-10 md:py-8">
       {% endif %}
           {% if value.heading %}<h2 class="font-display text-3xl font-medium leading-tight md:text-4xl">{{ value.heading }}</h2>{% endif %}
-          <div class="{% if value.heading %}mt-4 {% endif %}text-lg leading-8 [&_p+p]:mt-5">{{ value.body }}</div>
+          <div class="{% if value.heading %}mt-4 {% endif %}rich-text text-lg leading-8 [&_p+p]:mt-5">{{ value.body }}</div>
         </div>
     </div>
   </section>
@@ -39,7 +39,7 @@
         <div class="mx-auto max-w-2xl bg-linen-100 px-6 py-5 text-umber-900 md:px-8 md:py-6">
       {% endif %}
           {% if value.heading %}<h2 class="font-display text-2xl font-medium leading-tight md:text-3xl">{{ value.heading }}</h2>{% endif %}
-          <div class="{% if value.heading %}mt-3 {% endif %}leading-7 [&_p+p]:mt-4">{{ value.body }}</div>
+          <div class="{% if value.heading %}mt-3 {% endif %}rich-text leading-7 [&_p+p]:mt-4">{{ value.body }}</div>
         </div>
     </div>
   </section>

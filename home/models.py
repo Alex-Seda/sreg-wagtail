@@ -39,6 +39,30 @@ class SiteSettings(BaseSiteSetting):
     """Header/footer details, editable under Settings in the admin."""
 
     business_name = models.CharField(max_length=100, default="Seda Real Estate Group")
+    site_logo = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="Shown in the site header. Falls back to the business name when blank.",
+    )
+    team_logo = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="Optional team or company logo shown in the footer.",
+    )
+    broker_logo = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="Optional brokerage logo shown in the footer.",
+    )
     phone = models.CharField(max_length=30, blank=True)
     email = models.EmailField(blank=True)
     address = models.TextField(blank=True)
