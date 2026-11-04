@@ -1,10 +1,10 @@
 {% load wagtailimages_tags %}
-{% image value.image fill-1000x1200 format-webp as photo %}
+{% image value.image width-1200 format-webp as photo %}
 <section class="py-20 md:py-28{% if value.background == 'sand' %} bg-linen-100{% endif %}">
   <div class="wrap grid items-center gap-12 md:grid-cols-2 md:gap-20">
     <div class="{% if value.image_side == 'right' %}md:order-2{% endif %}">
       <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" loading="lazy"
-           class="aspect-5/6 w-full object-cover">
+           class="h-auto w-full">
     </div>
     <div>
       <h2 class="heading-lg">{{ value.heading }}</h2>

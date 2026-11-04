@@ -1,0 +1,46 @@
+{% if value.level == "strong" %}
+  <section class="py-12 md:py-16">
+    <div class="wrap">
+      {% if value.background == "dark" %}
+        <div class="mx-auto max-w-4xl bg-umber-900 px-6 py-8 text-linen-50 md:px-12 md:py-12">
+      {% elif value.background == "sand" %}
+        <div class="mx-auto max-w-4xl bg-sand-200 px-6 py-8 text-umber-900 md:px-12 md:py-12">
+      {% else %}
+        <div class="mx-auto max-w-4xl bg-linen-100 px-6 py-8 text-umber-900 md:px-12 md:py-12">
+      {% endif %}
+          {% if value.heading %}<h2 class="heading-lg">{{ value.heading }}</h2>{% endif %}
+          <div class="{% if value.heading %}mt-6 {% endif %}max-w-3xl text-lg leading-8 [&_p+p]:mt-5">{{ value.body }}</div>
+        </div>
+    </div>
+  </section>
+{% elif value.level == "medium" %}
+  <section class="py-10 md:py-14">
+    <div class="wrap">
+      {% if value.background == "dark" %}
+        <div class="mx-auto max-w-3xl border-l-4 border-sand-200 bg-umber-900 px-6 py-6 text-linen-50 md:px-10 md:py-8">
+      {% elif value.background == "sand" %}
+        <div class="mx-auto max-w-3xl border-l-4 border-umber-900 bg-sand-200 px-6 py-6 text-umber-900 md:px-10 md:py-8">
+      {% else %}
+        <div class="mx-auto max-w-3xl border-l-4 border-umber-900 bg-linen-100 px-6 py-6 text-umber-900 md:px-10 md:py-8">
+      {% endif %}
+          {% if value.heading %}<h2 class="font-display text-3xl font-medium leading-tight md:text-4xl">{{ value.heading }}</h2>{% endif %}
+          <div class="{% if value.heading %}mt-4 {% endif %}text-lg leading-8 [&_p+p]:mt-5">{{ value.body }}</div>
+        </div>
+    </div>
+  </section>
+{% else %}
+  <section class="py-8 md:py-10">
+    <div class="wrap">
+      {% if value.background == "dark" %}
+        <div class="mx-auto max-w-2xl bg-umber-900 px-6 py-5 text-linen-50 md:px-8 md:py-6">
+      {% elif value.background == "sand" %}
+        <div class="mx-auto max-w-2xl bg-sand-200 px-6 py-5 text-umber-900 md:px-8 md:py-6">
+      {% else %}
+        <div class="mx-auto max-w-2xl bg-linen-100 px-6 py-5 text-umber-900 md:px-8 md:py-6">
+      {% endif %}
+          {% if value.heading %}<h2 class="font-display text-2xl font-medium leading-tight md:text-3xl">{{ value.heading }}</h2>{% endif %}
+          <div class="{% if value.heading %}mt-3 {% endif %}leading-7 [&_p+p]:mt-4">{{ value.body }}</div>
+        </div>
+    </div>
+  </section>
+{% endif %}

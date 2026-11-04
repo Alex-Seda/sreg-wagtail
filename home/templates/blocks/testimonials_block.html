@@ -2,15 +2,15 @@
   <div class="wrap">
     {% if value.heading %}<h2 class="heading-lg max-w-2xl">{{ value.heading }}</h2>{% endif %}
 
-    <div class="{% if value.heading %}mt-12 {% endif %}grid gap-12 md:grid-cols-2 md:gap-x-16 md:gap-y-14">
+    <div class="{% if value.heading %}mt-10 {% endif %}grid gap-6 md:grid-cols-2 md:gap-8">
       {% for item in value.items %}
-        <figure class="border-l-2 border-taupe-400 pl-6">
-          <blockquote class="font-display text-2xl font-medium leading-snug md:text-3xl">
+        <figure class="border border-sand-200 bg-linen-50 px-6 py-7 md:px-8">
+          <blockquote class="text-base leading-7 text-umber-700">
             <p>{{ item.quote }}</p>
           </blockquote>
-          <figcaption class="mt-5 text-sm">
-            <span class="font-medium">{{ item.name }}</span>
-            {% if item.detail %}<span class="block text-umber-700">{{ item.detail }}</span>{% endif %}
+          <figcaption class="mt-6 border-t border-sand-200 pt-4 text-sm">
+            <span class="font-medium text-umber-900">{{ item.name }}</span>
+            {% if item.detail %}<span class="mt-1 block text-xs uppercase tracking-wide text-umber-700">{{ item.detail }}</span>{% endif %}
           </figcaption>
         </figure>
       {% endfor %}

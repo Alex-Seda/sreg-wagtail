@@ -47,6 +47,23 @@ class HeroBlock(blocks.StructBlock):
         label = "Hero"
 
 
+class SecondaryHeroBlock(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(max_length=60, required=False)
+    heading = blocks.CharBlock(max_length=120)
+    subheading = blocks.TextBlock(required=False, max_length=300)
+    image = ImageChooserBlock()
+    cta = LinkBlock(required=False, label="Button")
+    image_side = blocks.ChoiceBlock(
+        choices=[("right", "Image on right"), ("left", "Image on left")],
+        default="right",
+    )
+
+    class Meta:
+        template = "blocks/secondary_hero_block.html"
+        icon = "image"
+        label = "Secondary hero"
+
+
 # --- Statement (big serif paragraph) -----------------------------------------
 
 class StatementBlock(blocks.StructBlock):
@@ -238,6 +255,35 @@ class RichTextSectionBlock(blocks.RichTextBlock):
         label = "Text"
 
 
+# --- Featured text -----------------------------------------------------------
+
+class FeaturedTextBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(max_length=120, required=False)
+    body = blocks.RichTextBlock(features=RICH_FEATURES)
+    level = blocks.ChoiceBlock(
+        choices=[
+            ("strong", "Strong contrast"),
+            ("medium", "Featured"),
+            ("subtle", "Subtle"),
+        ],
+        default="strong",
+        help_text="Use Strong contrast for the most prominent callout.",
+    )
+    background = blocks.ChoiceBlock(
+        choices=[
+            ("dark", "Dark umber"),
+            ("sand", "Sand"),
+            ("light", "Light linen"),
+        ],
+        default="dark",
+    )
+
+    class Meta:
+        template = "blocks/featured_text_block.html"
+        icon = "warning"
+        label = "Featured text"
+
+
 # --- Call to action ----------------------------------------------------------
 
 class CTABlock(blocks.StructBlock):
@@ -259,6 +305,7 @@ class CTABlock(blocks.StructBlock):
 
 class HomeStreamBlock(blocks.StreamBlock):
     hero = HeroBlock()
+    secondary_hero = SecondaryHeroBlock()
     statement = StatementBlock()
     image_text = ImageTextBlock()
     listings = ListingsBlock()
@@ -268,6 +315,7 @@ class HomeStreamBlock(blocks.StreamBlock):
     faq = FAQBlock()
     video = VideoBlock()
     rich_text = RichTextSectionBlock()
+    featured_text = FeaturedTextBlock()
     cta = CTABlock()
 
     class Meta:
@@ -276,17 +324,20 @@ class HomeStreamBlock(blocks.StreamBlock):
 
 class StandardStreamBlock(blocks.StreamBlock):
     hero = HeroBlock()
+    secondary_hero = SecondaryHeroBlock()
     statement = StatementBlock()
     image_text = ImageTextBlock()
     testimonials = TestimonialsBlock()
     faq = FAQBlock()
     video = VideoBlock()
     rich_text = RichTextSectionBlock()
+    featured_text = FeaturedTextBlock()
     cta = CTABlock()
 
 
 class ServiceStreamBlock(blocks.StreamBlock):
     hero = HeroBlock()
+    secondary_hero = SecondaryHeroBlock()
     statement = StatementBlock()
     image_text = ImageTextBlock()
     services = ServicesBlock()
@@ -294,6 +345,7 @@ class ServiceStreamBlock(blocks.StreamBlock):
     faq = FAQBlock()
     video = VideoBlock()
     rich_text = RichTextSectionBlock()
+    featured_text = FeaturedTextBlock()
     cta = CTABlock()
 
     class Meta:
