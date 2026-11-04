@@ -1,0 +1,6 @@
+{% load wagtailimages_tags %}
+{% image value width-1400 format-webp as photo %}
+<figure class="my-10">
+  <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" loading="lazy" class="h-auto w-full">
+  {% if value.title %}<figcaption class="mt-3 text-sm text-umber-700">{{ value.title }}</figcaption>{% endif %}
+</figure>

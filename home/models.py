@@ -12,6 +12,7 @@ class HomePage(Page):
 
     max_count = 1
     parent_page_types = ["wagtailcore.Page"]
+    subpage_types = ["home.StandardPage", "home.ServicePage", "blog.BlogIndexPage"]
 
     content_panels = Page.content_panels + [FieldPanel("body")]
 
@@ -20,7 +21,7 @@ class StandardPage(Page):
     body = StreamField(StandardStreamBlock(), blank=True)
 
     parent_page_types = ["home.HomePage", "home.StandardPage"]
-    subpage_types = ["home.StandardPage", "home.ServicePage"]
+    subpage_types = ["home.StandardPage", "home.ServicePage", "blog.BlogIndexPage"]
 
     content_panels = Page.content_panels + [FieldPanel("body")]
 

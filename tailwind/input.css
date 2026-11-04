@@ -87,4 +87,15 @@
   .text-linen-50 .rich-text a:hover {
     color: var(--color-linen-50);
   }
+
+  .embed-frame > div,
+  .embed-frame iframe {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .embed-frame iframe {
+    display: block;
+    border: 0;
+  }
 }
