@@ -25,7 +25,7 @@
         {% endif %}
       </ul>
       {% if s.phone %}
-        <a href="tel:{{ s.phone }}" class="bg-umber-900 px-5 py-2.5 text-sm font-medium text-linen-50 transition-colors hover:bg-umber-700">{{ s.phone }}</a>
+        <a href="https://listings.sedarealestategroup.com/contact.php" class="bg-umber-900 px-5 py-2.5 text-sm font-medium text-linen-50 transition-colors hover:bg-umber-700">Contact Us ↗</a>
       {% endif %}
     </nav>
 
@@ -42,9 +42,7 @@
             <a href="{{ item_url }}" class="px-3 py-3 text-base font-medium hover:bg-linen-100"{% if request.path == item_url %} aria-current="page"{% endif %}>{{ item.title }}</a>
           {% endfor %}
         {% endif %}
-        {% if s.phone %}
-          <a href="tel:{{ s.phone }}" class="mt-2 bg-umber-900 px-3 py-3 text-center text-base font-medium text-linen-50">Call {{ s.phone }}</a>
-        {% endif %}
+        <a href="https://listings.sedarealestategroup.com/contact.php" class="mt-2 bg-umber-900 px-3 py-3 text-center text-base font-medium text-linen-50">Contact Us ↗</a>
       </nav>
     </details>
   </div>
