@@ -1,0 +1,17 @@
+{% load wagtailcore_tags %}
+{% pageurl item as item_url %}
+<li class="relative group">
+  <a href="{{ item_url }}" class="text-sm font-medium underline-offset-4 hover:underline"{% if request.path == item_url %} aria-current="page"{% endif %}>{{ item.title }}</a>
+  {% with children=item.get_navigation_children %}
+    {% if children %}
+      <ul class="absolute left-0 top-full z-20 hidden min-w-48 border border-sand-200 bg-linen-50 py-2 shadow-sm group-hover:block group-focus-within:block">
+        {% for child in children %}
+          <li>
+            {% pageurl child as child_url %}
+            <a href="{{ child_url }}" class="block px-4 py-2 text-sm hover:bg-linen-100"{% if request.path == child_url %} aria-current="page"{% endif %}>{{ child.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %}
+</li>

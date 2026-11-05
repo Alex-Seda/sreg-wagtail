@@ -12,6 +12,7 @@ from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail import blocks
 
 from home.blocks import FeaturedTextBlock
+from home.models import NavigationPageMixin
 
 
 BLOG_RICH_TEXT_FEATURES = [
@@ -66,7 +67,7 @@ class BlogPostBodyBlock(blocks.StreamBlock):
     featured_text = FeaturedTextBlock()
 
 
-class BlogIndexPage(Page):
+class BlogIndexPage(NavigationPageMixin, Page):
     intro = RichTextField(features=BLOG_RICH_TEXT_FEATURES, blank=True)
 
     parent_page_types = ["home.HomePage", "home.StandardPage"]
@@ -75,6 +76,9 @@ class BlogIndexPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel("intro"),
     ]
+
+    def get_navigation_children(self):
+        return self.get_children().live()
 
 
 class BlogPostPage(Page):

@@ -3,8 +3,10 @@ from modelcluster.fields import ParentalKey
 from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail.models import Orderable, Page
 
+from home.models import NavigationPageMixin
 
-class TeamPage(Page):
+
+class TeamPage(NavigationPageMixin, Page):
     intro = models.TextField(
         blank=True,
         help_text="A short introduction shown below the page title.",

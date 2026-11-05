@@ -1,0 +1,29 @@
+{% load wagtailcore_tags %}
+<li class="relative group">
+  {% if item.page %}
+    {% pageurl item.page as item_url %}
+    <a href="{{ item_url }}" class="text-sm font-medium underline-offset-4 hover:underline"{% if request.path == item_url %} aria-current="page"{% endif %}>{{ item.get_label }}</a>
+  {% else %}
+    <span class="text-sm font-medium">{{ item.get_label }}</span>
+  {% endif %}
+  {% if item.submenu_items.all or item.page.get_navigation_children %}
+      <ul class="absolute left-0 top-full z-20 hidden min-w-48 border border-sand-200 bg-linen-50 py-2 shadow-sm group-hover:block group-focus-within:block">
+        {% for child in item.submenu_items.all %}
+          <li>
+            {% if child.page %}
+              {% pageurl child.page as child_url %}
+              <a href="{{ child_url }}" class="block px-4 py-2 text-sm hover:bg-linen-100"{% if request.path == child_url %} aria-current="page"{% endif %}>{{ child.get_label }}</a>
+            {% endif %}
+          </li>
+        {% endfor %}
+        {% if item.page %}
+          {% for child in item.page.get_navigation_children %}
+            <li>
+              {% pageurl child as child_url %}
+              <a href="{{ child_url }}" class="block px-4 py-2 text-sm hover:bg-linen-100"{% if request.path == child_url %} aria-current="page"{% endif %}>{{ child.title }}</a>
+            </li>
+          {% endfor %}
+        {% endif %}
+      </ul>
+  {% endif %}
+</li>
