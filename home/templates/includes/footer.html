@@ -83,7 +83,27 @@
     {% endif %}
   </div>
   <div class="border-t border-umber-700">
-    <p class="wrap py-6 text-xs text-sand-200">&copy; {% now "Y" %} {{ s.business_name }}. All rights reserved.</p>
+    <div class="wrap flex flex-col gap-4 py-6 text-xs text-sand-200 md:flex-row md:items-center md:justify-between">
+      <p>&copy; {% now "Y" %} {{ s.business_name }}. All rights reserved.</p>
+      {% if s.terms_of_use or s.privacy_policy or s.accessibility or s.fair_housing_statement %}
+        <nav aria-label="Legal" class="footer-legal">
+          <ul class="footer-legal__links">
+            {% if s.terms_of_use %}
+              <li><a href="{{ s.terms_of_use.url }}">Terms of Use</a></li>
+            {% endif %}
+            {% if s.privacy_policy %}
+              <li><a href="{{ s.privacy_policy.url }}">Privacy Policy</a></li>
+            {% endif %}
+            {% if s.accessibility %}
+              <li><a href="{{ s.accessibility.url }}">Accessibility</a></li>
+            {% endif %}
+            {% if s.fair_housing_statement %}
+              <li><a href="{{ s.fair_housing_statement.url }}">Fair Housing Statement</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+      {% endif %}
+    </div>
   </div>
 </footer>
 {% endwith %}

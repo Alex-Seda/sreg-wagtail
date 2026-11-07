@@ -98,6 +98,42 @@ class SiteSettings(BaseSiteSetting, ClusterableModel):
         blank=True,
         help_text="Shown in the footer, e.g. brokerage license and Equal Housing Opportunity statement.",
     )
+    terms_of_use = models.ForeignKey(
+        "home.LegalPage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        limit_choices_to={"live": True},
+        help_text="Optional footer link to your Terms of Use page.",
+    )
+    privacy_policy = models.ForeignKey(
+        "home.LegalPage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        limit_choices_to={"live": True},
+        help_text="Optional footer link to your Privacy Policy page.",
+    )
+    accessibility = models.ForeignKey(
+        "home.LegalPage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        limit_choices_to={"live": True},
+        help_text="Optional footer link to your Accessibility page.",
+    )
+    fair_housing_statement = models.ForeignKey(
+        "home.LegalPage",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        limit_choices_to={"live": True},
+        help_text="Optional footer link to your Fair Housing Statement page.",
+    )
     facebook = models.URLField(blank=True)
     instagram = models.URLField(blank=True)
     linkedin = models.URLField(blank=True)
@@ -113,6 +149,10 @@ class SiteSettings(BaseSiteSetting, ClusterableModel):
         FieldPanel("email"),
         FieldPanel("address"),
         FieldPanel("license_info"),
+        FieldPanel("terms_of_use"),
+        FieldPanel("privacy_policy"),
+        FieldPanel("accessibility"),
+        FieldPanel("fair_housing_statement"),
         FieldPanel("facebook"),
         FieldPanel("instagram"),
         FieldPanel("linkedin"),

@@ -1,4 +1,4 @@
-from home.models import HomePage, LegalPage, ServicePage, StandardPage
+from home.models import HomePage, LegalPage, ServicePage, SiteSettings, StandardPage
 
 from wagtail.models import Page, Site
 from wagtail.test.utils import WagtailPageTestCase
@@ -45,7 +45,9 @@ class HomeTests(WagtailPageTestCase):
 class ContentPageTests(WagtailPageTestCase):
     def setUp(self):
         root_page = Page.get_first_root_node()
-        Site.objects.create(hostname="testsite", root_page=root_page, is_default_site=True)
+        self.site = Site.objects.create(
+            hostname="testsite", root_page=root_page, is_default_site=True
+        )
         self.homepage = HomePage(title="Home")
         root_page.add_child(instance=self.homepage)
 
@@ -75,3 +77,14 @@ class ContentPageTests(WagtailPageTestCase):
 
         self.assertPageIsRenderable(page)
         self.assertTemplateUsed(self.client.get(page.url), "home/legal_page.html")
+
+    def test_configured_legal_pages_are_shown_in_footer(self):
+        page = LegalPage(title="Privacy Policy")
+        self.homepage.add_child(instance=page)
+        SiteSettings.objects.create(site=self.site, privacy_policy=page)
+
+        response = self.client.get(self.homepage.url)
+
+        self.assertContains(response, f'href="{page.url}"')
+        self.assertContains(response, "Privacy Policy")
+        self.assertNotContains(response, "Terms of Use")
