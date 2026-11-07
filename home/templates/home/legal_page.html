@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-legalpage{% endblock %}
+
+{% block content %}
+  <article class="legal-page bg-linen-50">
+    <header class="border-b border-sand-200 bg-linen-100">
+      <div class="wrap max-w-5xl py-16 md:py-24">
+        <h1 class="heading-lg max-w-3xl text-umber-900">{{ page.title }}</h1>
+      </div>
+    </header>
+
+    <div class="wrap max-w-5xl py-12 md:py-20">
+      <div class="legal-page__content max-w-3xl">
+        {% for block in page.body %}
+          {% include_block block %}
+        {% endfor %}
+      </div>
+    </div>
+  </article>
+{% endblock %}

@@ -350,3 +350,32 @@ class ServiceStreamBlock(blocks.StreamBlock):
 
     class Meta:
         block_counts = {"hero": {"max_num": 1}}
+
+
+# --- Legal pages -------------------------------------------------------------
+
+class LegalSectionHeadingBlock(blocks.RichTextBlock):
+    def __init__(self, **kwargs):
+        kwargs.setdefault("features", ["h2", "h3", "bold", "italic", "link"])
+        super().__init__(**kwargs)
+
+    class Meta:
+        template = "blocks/legal_section_heading_block.html"
+        icon = "title"
+        label = "Section heading"
+
+
+class LegalBodyBlock(blocks.RichTextBlock):
+    def __init__(self, **kwargs):
+        kwargs.setdefault("features", ["bold", "italic", "link", "ul", "ol"])
+        super().__init__(**kwargs)
+
+    class Meta:
+        template = "blocks/legal_body_block.html"
+        icon = "doc-full"
+        label = "Body"
+
+
+class LegalStreamBlock(blocks.StreamBlock):
+    section_heading = LegalSectionHeadingBlock()
+    body = LegalBodyBlock()

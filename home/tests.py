@@ -1,4 +1,4 @@
-from home.models import HomePage, ServicePage, StandardPage
+from home.models import HomePage, LegalPage, ServicePage, StandardPage
 
 from wagtail.models import Page, Site
 from wagtail.test.utils import WagtailPageTestCase
@@ -68,3 +68,10 @@ class ContentPageTests(WagtailPageTestCase):
         self.homepage.add_child(instance=page)
 
         self.assertEqual(page.allowed_subpage_models(), [])
+
+    def test_legal_page_can_be_created_under_homepage(self):
+        page = LegalPage(title="Privacy Policy")
+        self.homepage.add_child(instance=page)
+
+        self.assertPageIsRenderable(page)
+        self.assertTemplateUsed(self.client.get(page.url), "home/legal_page.html")

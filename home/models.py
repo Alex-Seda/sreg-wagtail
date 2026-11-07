@@ -5,7 +5,7 @@ from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import StreamField
 from wagtail.models import ClusterableModel, Orderable, Page
 
-from .blocks import HomeStreamBlock, ServiceStreamBlock, StandardStreamBlock
+from .blocks import HomeStreamBlock, LegalStreamBlock, ServiceStreamBlock, StandardStreamBlock
 
 
 class NavigationPageMixin:
@@ -21,6 +21,7 @@ class HomePage(NavigationPageMixin, Page):
     subpage_types = [
         "home.StandardPage",
         "home.ServicePage",
+        "home.LegalPage",
         "blog.BlogIndexPage",
         "team.TeamPage",
     ]
@@ -35,6 +36,7 @@ class StandardPage(NavigationPageMixin, Page):
     subpage_types = [
         "home.StandardPage",
         "home.ServicePage",
+        "home.LegalPage",
         "blog.BlogIndexPage",
         "team.TeamPage",
     ]
@@ -44,6 +46,15 @@ class StandardPage(NavigationPageMixin, Page):
 
 class ServicePage(NavigationPageMixin, Page):
     body = StreamField(ServiceStreamBlock(), blank=True)
+
+    parent_page_types = ["home.HomePage", "home.StandardPage"]
+    subpage_types = []
+
+    content_panels = Page.content_panels + [FieldPanel("body")]
+
+
+class LegalPage(Page):
+    body = StreamField(LegalStreamBlock(), blank=True)
 
     parent_page_types = ["home.HomePage", "home.StandardPage"]
     subpage_types = []
