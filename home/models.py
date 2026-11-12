@@ -194,10 +194,15 @@ class MainNavigationItem(Orderable, ClusterableModel):
         related_name="+",
         limit_choices_to={"live": True},
     )
+    external_url = models.URLField(
+        blank=True,
+        help_text="Use instead of a page for an external destination.",
+    )
 
     panels = [
         FieldPanel("label"),
         FieldPanel("page"),
+        FieldPanel("external_url"),
         InlinePanel("submenu_items", label="Submenu items"),
     ]
 
@@ -224,10 +229,15 @@ class MainNavigationSubItem(Orderable):
         related_name="+",
         limit_choices_to={"live": True},
     )
+    external_url = models.URLField(
+        blank=True,
+        help_text="Use instead of a page for an external destination.",
+    )
 
     panels = [
         FieldPanel("label"),
         FieldPanel("page"),
+        FieldPanel("external_url"),
     ]
 
     def get_label(self):

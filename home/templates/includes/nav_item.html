@@ -3,6 +3,8 @@
   {% if item.page %}
     {% pageurl item.page as item_url %}
     <a href="{{ item_url }}" class="text-sm font-medium underline-offset-4 hover:underline"{% if request.path == item_url %} aria-current="page"{% endif %}>{{ item.get_label }}</a>
+  {% elif item.external_url %}
+    <a href="{{ item.external_url }}" target="_blank" class="text-sm font-medium underline-offset-4 hover:underline">{{ item.get_label }}</a>
   {% else %}
     <span class="text-sm font-medium">{{ item.get_label }}</span>
   {% endif %}
@@ -13,6 +15,8 @@
             {% if child.page %}
               {% pageurl child.page as child_url %}
               <a href="{{ child_url }}" class="block px-4 py-2 text-sm hover:bg-linen-100"{% if request.path == child_url %} aria-current="page"{% endif %}>{{ child.get_label }}</a>
+            {% elif child.external_url %}
+              <a href="{{ child.external_url }}" target="_blank" class="block px-4 py-2 text-sm hover:bg-linen-100">{{ child.get_label }}</a>
             {% endif %}
           </li>
         {% endfor %}
