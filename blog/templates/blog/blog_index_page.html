@@ -16,35 +16,56 @@
 
   <section class="py-16 md:py-24">
     <div class="wrap">
-      {% with posts=page.get_children.live.specific %}
-        {% if posts %}
-          <div class="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
-            {% for post in posts %}
-              <article>
+      {% if page_obj.object_list %}
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {% for post in page_obj %}
+            <article class="group relative flex h-full flex-col border border-sand-200 bg-linen-50 transition-shadow duration-200 hover:shadow-[0_1rem_2.5rem_rgba(47,36,31,0.08)]">
                 {% if post.featured_image %}
                   {% image post.featured_image fill-1000x700 format-webp as photo %}
-                  <a href="{% pageurl post %}" class="group block overflow-hidden bg-linen-100">
+                  <a href="{% pageurl post %}" class="block overflow-hidden bg-linen-100">
                     <img src="{{ photo.url }}" width="{{ photo.width }}" height="{{ photo.height }}" alt="{{ photo.alt }}" loading="lazy"
-                         class="aspect-4/3 w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                         class="aspect-[16/10] w-full object-cover transition-transform duration-300 group-hover:scale-105">
                   </a>
                 {% endif %}
-                <div class="{% if post.featured_image %}mt-6 {% endif %}">
-                  <p class="text-xs font-semibold uppercase tracking-[0.16em] text-umber-700">
+                <div class="flex flex-1 flex-col p-7 md:p-8">
+                  <div class="flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.16em] text-umber-700">
+                    <span>Article</span>
+                    <span class="h-px w-6 bg-sand-200"></span>
+                    <time datetime="{% if post.published_date %}{{ post.published_date|date:'Y-m-d' }}{% elif post.first_published_at %}{{ post.first_published_at|date:'Y-m-d' }}{% endif %}">
                     {% if post.published_date %}{{ post.published_date|date:"F j, Y" }}{% elif post.first_published_at %}{{ post.first_published_at|date:"F j, Y" }}{% endif %}
-                  </p>
-                  <h2 class="mt-3 font-display text-3xl font-medium leading-tight">
-                    <a href="{% pageurl post %}" class="hover:text-umber-700">{{ post.title }}</a>
+                    </time>
+                  </div>
+                  <h2 class="mt-5 font-display text-3xl font-medium leading-tight text-umber-900">
+                    <a href="{% pageurl post %}" class="after:absolute after:inset-0 hover:text-umber-700">{{ post.title }}</a>
                   </h2>
                   {% if post.excerpt %}<p class="mt-4 leading-7 text-umber-700">{{ post.excerpt }}</p>{% endif %}
-                  <a href="{% pageurl post %}" class="mt-5 inline-block text-sm font-medium text-umber-700 underline underline-offset-4 hover:text-umber-900">Read article</a>
+                  <div class="relative mt-8 flex items-center justify-between border-t border-sand-200 pt-5 text-sm font-medium text-umber-700">
+                    <span>Read article</span>
+                    <span aria-hidden="true" class="text-lg transition-transform duration-200 group-hover:translate-x-1">→</span>
+                  </div>
                 </div>
-              </article>
-            {% endfor %}
-          </div>
-        {% else %}
-          <p class="text-lg text-umber-700">Articles coming soon.</p>
+            </article>
+          {% endfor %}
+        </div>
+
+        {% if page_obj.has_other_pages %}
+          <nav class="mt-14 flex items-center justify-between border-t border-sand-200 pt-6 text-sm font-medium text-umber-700" aria-label="Blog pagination">
+            {% if page_obj.has_previous %}
+              <a href="?page={{ page_obj.previous_page_number }}" class="hover:text-umber-900">← Previous</a>
+            {% else %}
+              <span class="text-taupe-400">← Previous</span>
+            {% endif %}
+            <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+            {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}" class="hover:text-umber-900">Next →</a>
+            {% else %}
+              <span class="text-taupe-400">Next →</span>
+            {% endif %}
+          </nav>
         {% endif %}
-      {% endwith %}
+      {% else %}
+        <p class="text-lg text-umber-700">Articles coming soon.</p>
+      {% endif %}
     </div>
   </section>
 {% endblock %}

@@ -17,7 +17,9 @@
             {% elif page.first_published_at %}
               <time datetime="{{ page.first_published_at|date:'Y-m-d' }}">{{ page.first_published_at|date:"F j, Y" }}</time>
             {% endif %}
-            {% if page.author %}<span>By {{ page.author.get_full_name|default:page.author.username }}</span>{% endif %}
+            {% if page.author %}
+              <span>By {% if page.author.first_name or page.author.last_name %}{{ page.author.first_name }} {{ page.author.last_name }}{% else %}{{ page.author.username }}{% endif %}</span>
+            {% endif %}
           </div>
           {% if page.tags.all %}
             <ul class="mt-6 flex flex-wrap gap-2">
@@ -42,7 +44,46 @@
         {% for block in page.body %}
           {% include_block block %}
         {% endfor %}
+
+        {% if page.author %}
+          <aside class="mt-16 flex items-center gap-5 border-y border-sand-200 py-6" aria-label="About the author">
+            {% if page.author.wagtail_userprofile.avatar %}
+              <img src="{{ page.author.wagtail_userprofile.avatar.url }}" alt="" class="h-16 w-16 rounded-full object-cover">
+            {% else %}
+              <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-linen-100 font-display text-2xl text-umber-700" aria-hidden="true">
+                {{ page.author.first_name|first|default:page.author.username|first }}
+              </div>
+            {% endif %}
+            <div>
+              <p class="text-xs font-semibold uppercase tracking-[0.16em] text-umber-700">Written by</p>
+              <p class="mt-1 font-display text-2xl font-medium text-umber-900">
+                {% if page.author.first_name or page.author.last_name %}{{ page.author.first_name }} {{ page.author.last_name }}{% else %}{{ page.author.username }}{% endif %}
+              </p>
+            </div>
+          </aside>
+        {% endif %}
       </div>
     </div>
+
+    {% if previous_post or next_post %}
+      <nav class="border-t border-sand-200 bg-linen-50" aria-label="More journal articles">
+        <div class="wrap grid md:grid-cols-2">
+          {% if previous_post %}
+            <a href="{% pageurl previous_post %}" class="border-b border-sand-200 py-8 pr-8 hover:text-umber-700 md:border-b-0 md:border-r md:py-10">
+              <span class="text-xs font-semibold uppercase tracking-[0.16em] text-umber-700">Previous article</span>
+              <span class="mt-2 block font-display text-2xl font-medium">{{ previous_post.title }}</span>
+            </a>
+          {% else %}
+            <div></div>
+          {% endif %}
+          {% if next_post %}
+            <a href="{% pageurl next_post %}" class="py-8 pl-0 text-left hover:text-umber-700 md:py-10 md:pl-8 md:text-right">
+              <span class="text-xs font-semibold uppercase tracking-[0.16em] text-umber-700">Next article</span>
+              <span class="mt-2 block font-display text-2xl font-medium">{{ next_post.title }}</span>
+            </a>
+          {% endif %}
+        </div>
+      </nav>
+    {% endif %}
   </article>
 {% endblock %}

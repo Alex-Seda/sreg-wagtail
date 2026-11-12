@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.paginator import Paginator
 from django.db import models
 from modelcluster.fields import ParentalKey
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -80,6 +81,12 @@ class BlogIndexPage(NavigationPageMixin, Page):
     def get_navigation_children(self):
         return self.get_children().live()
 
+    def get_context(self, request):
+        context = super().get_context(request)
+        posts = self.get_children().live().specific().order_by("-first_published_at")
+        context["page_obj"] = Paginator(posts, 9).get_page(request.GET.get("page"))
+        return context
+
 
 class BlogPostPage(Page):
     excerpt = models.TextField(
@@ -124,6 +131,31 @@ class BlogPostPage(Page):
         ),
         FieldPanel("body"),
     ]
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        posts = list(
+            self.get_parent()
+            .get_children()
+            .live()
+            .specific()
+            .order_by("-first_published_at", "-id")
+        )
+        current_index = next(
+            (index for index, post in enumerate(posts) if post.pk == self.pk),
+            None,
+        )
+        context["previous_post"] = (
+            posts[current_index + 1]
+            if current_index is not None and current_index + 1 < len(posts)
+            else None
+        )
+        context["next_post"] = (
+            posts[current_index - 1]
+            if current_index is not None and current_index > 0
+            else None
+        )
+        return context
 
 
 class BlogPageTag(TaggedItemBase):
