@@ -301,6 +301,191 @@ class CTABlock(blocks.StructBlock):
         label = "Call to action"
 
 
+# --- Seasonal pages ----------------------------------------------------------
+
+class SeasonalHeroBlock(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(max_length=60, required=False, default="Season of giving")
+    heading = blocks.CharBlock(max_length=120)
+    subheading = blocks.TextBlock(required=False, max_length=300)
+    image = ImageChooserBlock(required=False)
+    primary_cta = LinkBlock(required=False, label="Primary button")
+    secondary_cta = LinkBlock(required=False, label="Secondary button")
+
+    class Meta:
+        template = "blocks/seasonal_hero_block.html"
+        icon = "image"
+        label = "Seasonal hero"
+
+
+class SeasonalImpactItemBlock(blocks.StructBlock):
+    title = blocks.CharBlock(max_length=80)
+    description = blocks.TextBlock(max_length=300)
+    link = LinkBlock(required=False, label="Link")
+
+    class Meta:
+        icon = "heart"
+        label_format = "{title}"
+
+
+class SeasonalImpactBlock(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(max_length=60, required=False, default="Giving back")
+    heading = blocks.CharBlock(max_length=120)
+    intro = blocks.TextBlock(required=False, max_length=300)
+    items = blocks.ListBlock(SeasonalImpactItemBlock(), min_num=1, max_num=6)
+    background = blocks.ChoiceBlock(
+        choices=[("linen", "Light"), ("sand", "Warm sand")],
+        default="linen",
+    )
+
+    class Meta:
+        template = "blocks/seasonal_impact_block.html"
+        icon = "list-ul"
+        label = "Seasonal impact cards"
+
+
+class SeasonalMessageBlock(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(max_length=60, required=False)
+    heading = blocks.CharBlock(max_length=120)
+    body = blocks.RichTextBlock(features=RICH_FEATURES)
+    image = ImageChooserBlock(required=False)
+    link = LinkBlock(required=False, label="Button")
+
+    class Meta:
+        template = "blocks/seasonal_message_block.html"
+        icon = "doc-full"
+        label = "Seasonal message"
+
+
+class SeasonalCTABlock(blocks.StructBlock):
+    heading = blocks.CharBlock(max_length=120)
+    text = blocks.TextBlock(required=False, max_length=300)
+    cta = LinkBlock(required=False, label="Button")
+
+    class Meta:
+        template = "blocks/seasonal_cta_block.html"
+        icon = "mail"
+        label = "Seasonal call to action"
+
+
+class SeasonalTextBlock(blocks.RichTextBlock):
+    def __init__(self, **kwargs):
+        kwargs.setdefault("features", ["h2", "h3", *RICH_FEATURES])
+        super().__init__(**kwargs)
+
+    class Meta:
+        template = "blocks/seasonal_text_block.html"
+        icon = "doc-full"
+        label = "Seasonal text"
+
+
+class SeasonalVideoBlock(blocks.StructBlock):
+    heading = blocks.CharBlock(max_length=120, required=False)
+    embed = EmbedBlock(help_text="YouTube or Vimeo link.")
+
+    class Meta:
+        template = "blocks/seasonal_video_block.html"
+        icon = "media"
+        label = "Seasonal video"
+
+
+class SeasonalResourceBlock(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(max_length=60, required=False)
+    heading = blocks.CharBlock(max_length=120)
+    body = blocks.RichTextBlock(
+        features=["h3", "bold", "italic", "link", "ul", "ol"]
+    )
+    link = LinkBlock(required=False, label="Button")
+    accent = blocks.ChoiceBlock(
+        choices=[("evergreen", "Evergreen"), ("berry", "Berry")],
+        default="evergreen",
+    )
+
+    class Meta:
+        template = "blocks/seasonal_resource_block.html"
+        icon = "doc-full"
+        label = "Seasonal resource section"
+
+
+class SeasonalDonationListBlock(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(max_length=60, required=False, default="Donation list")
+    heading = blocks.CharBlock(max_length=120)
+    intro = blocks.TextBlock(required=False, max_length=300)
+    items = blocks.ListBlock(blocks.CharBlock(max_length=160), min_num=1, max_num=12)
+    priority_note = blocks.CharBlock(max_length=240, required=False)
+
+    class Meta:
+        template = "blocks/seasonal_donation_list_block.html"
+        icon = "list-ul"
+        label = "Donation list"
+
+
+class SeasonalDeadlineBlock(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(max_length=60, required=False, default="Donation deadline")
+    heading = blocks.CharBlock(max_length=120)
+    date = blocks.CharBlock(max_length=80)
+    detail = blocks.TextBlock(required=False, max_length=240)
+
+    class Meta:
+        template = "blocks/seasonal_deadline_block.html"
+        icon = "date"
+        label = "Donation deadline"
+
+
+class SeasonalOptionItemBlock(blocks.StructBlock):
+    title = blocks.CharBlock(max_length=100)
+    details = blocks.RichTextBlock(features=["h3", "bold", "italic", "link", "ul", "ol"])
+
+    class Meta:
+        icon = "list-ul"
+        label_format = "{title}"
+
+
+class SeasonalOptionsBlock(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(max_length=60, required=False, default="Donation drop-off instructions")
+    heading = blocks.CharBlock(max_length=120)
+    intro = blocks.TextBlock(required=False, max_length=300)
+    options = blocks.ListBlock(SeasonalOptionItemBlock(), min_num=1, max_num=8)
+
+    class Meta:
+        template = "blocks/seasonal_options_block.html"
+        icon = "list-ul"
+        label = "Donation options"
+
+
+class SeasonalStepsBlock(blocks.StructBlock):
+    eyebrow = blocks.CharBlock(max_length=60, required=False, default="How to contribute")
+    heading = blocks.CharBlock(max_length=120)
+    intro = blocks.TextBlock(required=False, max_length=300)
+    steps = blocks.ListBlock(
+        blocks.RichTextBlock(features=["bold", "italic", "link", "ul", "ol"]),
+        min_num=1,
+        max_num=8,
+        label="Step",
+    )
+
+    class Meta:
+        template = "blocks/seasonal_steps_block.html"
+        icon = "list-ol"
+        label = "Contribution steps"
+
+
+class SeasonalStreamBlock(blocks.StreamBlock):
+    hero = SeasonalHeroBlock()
+    text = SeasonalTextBlock()
+    video = SeasonalVideoBlock()
+    donation_list = SeasonalDonationListBlock()
+    deadline = SeasonalDeadlineBlock()
+    impact = SeasonalImpactBlock()
+    message = SeasonalMessageBlock()
+    resource = SeasonalResourceBlock()
+    options = SeasonalOptionsBlock()
+    steps = SeasonalStepsBlock()
+    cta = SeasonalCTABlock()
+
+    class Meta:
+        block_counts = {"hero": {"max_num": 1}}
+
+
 # --- The StreamField ---------------------------------------------------------
 
 class HomeStreamBlock(blocks.StreamBlock):

@@ -1,0 +1,18 @@
+<section class="py-12 md:py-16">
+  <div class="wrap">
+    <div class="relative grid overflow-hidden border border-sand-200 bg-linen-100 lg:grid-cols-12">
+      <div class="pointer-events-none absolute right-4 top-4 h-20 w-20 rounded-full border border-berry-700/20"></div>
+      <div class="relative bg-evergreen-900 px-6 py-10 text-linen-50 sm:px-10 lg:col-span-4 lg:px-12 lg:py-12">
+        <div class="absolute left-0 top-0 h-2 w-full{% if value.accent == 'berry' %} bg-berry-700{% else %} bg-sand-200{% endif %}"></div>
+        {% if value.eyebrow %}<p class="text-sm font-semibold uppercase tracking-[0.2em] text-sand-200">{{ value.eyebrow }}</p>{% endif %}
+        <h2 class="heading-lg mt-3">{{ value.heading }}</h2>
+      </div>
+      <div class="px-6 py-10 sm:px-10 lg:col-span-8 lg:px-12 lg:py-12">
+        <div class="rich-text max-w-3xl leading-8 text-umber-900 [&_h3]:font-display [&_h3]:text-3xl [&_h3]:font-medium [&_h3]:leading-tight [&_h3:not(:first-child)]:mt-8 [&_p+p]:mt-5">
+          {{ value.body }}
+        </div>
+        {% if value.link.label %}<div class="mt-8">{% include "includes/button.html" with link=value.link variant="outline" %}</div>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>

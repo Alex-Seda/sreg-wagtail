@@ -1,0 +1,18 @@
+<section class="py-16 md:py-24">
+  <div class="wrap">
+    <div class="max-w-3xl">
+      {% if value.eyebrow %}<p class="text-sm font-semibold uppercase tracking-[0.2em] text-berry-700">{{ value.eyebrow }}</p>{% endif %}
+      <h2 class="heading-lg mt-3">{{ value.heading }}</h2>
+      {% if value.intro %}<p class="mt-5 text-lg leading-8 text-umber-700">{{ value.intro }}</p>{% endif %}
+    </div>
+    <div class="mt-10 grid gap-5 lg:grid-cols-3">
+      {% for option in value.options %}
+        <article class="relative overflow-hidden border border-sand-200 bg-linen-100 px-6 py-7 sm:px-7">
+          <div class="absolute left-0 top-0 h-1.5 w-full bg-evergreen-800"></div>
+          <h3 class="font-display text-3xl font-medium leading-tight">{{ option.title }}</h3>
+          <div class="rich-text mt-5 leading-8 text-umber-700 [&_h3]:font-display [&_h3]:text-2xl [&_h3]:font-medium [&_h3]:leading-tight [&_p+p]:mt-4">{{ option.details }}</div>
+        </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,4 +1,4 @@
-from home.models import HomePage, LegalPage, ServicePage, SiteSettings, StandardPage
+from home.models import HomePage, LegalPage, SeasonalPage, ServicePage, SiteSettings, StandardPage
 
 from wagtail.models import Page, Site
 from wagtail.test.utils import WagtailPageTestCase
@@ -67,6 +67,19 @@ class ContentPageTests(WagtailPageTestCase):
 
     def test_service_page_cannot_have_children(self):
         page = ServicePage(title="Move Coordination")
+        self.homepage.add_child(instance=page)
+
+        self.assertEqual(page.allowed_subpage_models(), [])
+
+    def test_seasonal_page_can_be_created_under_homepage(self):
+        page = SeasonalPage(title="Holiday Giving")
+        self.homepage.add_child(instance=page)
+
+        self.assertPageIsRenderable(page)
+        self.assertTemplateUsed(self.client.get(page.url), "home/seasonal_page.html")
+
+    def test_seasonal_page_cannot_have_children(self):
+        page = SeasonalPage(title="Holiday Giving")
         self.homepage.add_child(instance=page)
 
         self.assertEqual(page.allowed_subpage_models(), [])

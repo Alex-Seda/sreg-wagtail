@@ -1,0 +1,15 @@
+<section class="py-16 md:py-20">
+  <div class="wrap">
+    {% if value.heading %}
+      <div class="mb-8 flex items-end justify-between gap-6">
+        <h2 class="heading-lg">{{ value.heading }}</h2>
+        <span class="hidden h-2 w-14 shrink-0 bg-berry-700 sm:block"></span>
+      </div>
+    {% endif %}
+    <div class="bg-evergreen-900 p-3 shadow-sm sm:p-5 md:p-6">
+      <div class="embed-frame relative aspect-video w-full overflow-hidden border border-sand-200/40 bg-umber-900">
+        {{ value.embed }}
+      </div>
+    </div>
+  </div>
+</section>

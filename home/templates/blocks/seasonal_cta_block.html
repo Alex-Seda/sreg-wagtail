@@ -1,0 +1,12 @@
+<section class="py-12 md:py-16">
+  <div class="wrap">
+    <div class="relative overflow-hidden bg-evergreen-900 px-6 py-10 text-linen-50 md:px-12 md:py-14">
+      <div class="absolute right-0 top-0 h-full w-2 bg-berry-700"></div>
+      <div class="relative max-w-3xl">
+        <h2 class="heading-lg">{{ value.heading }}</h2>
+        {% if value.text %}<p class="mt-5 max-w-2xl text-lg leading-8 text-linen-100">{{ value.text }}</p>{% endif %}
+        {% if value.cta.label %}<div class="mt-8">{% include "includes/button.html" with link=value.cta variant="light" %}</div>{% endif %}
+      </div>
+    </div>
+  </div>
+</section>

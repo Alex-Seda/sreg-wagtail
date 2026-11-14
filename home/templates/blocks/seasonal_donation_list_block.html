@@ -1,0 +1,26 @@
+<section class="py-12 md:py-16">
+  <div class="wrap">
+    <div class="relative overflow-hidden border border-sand-200 bg-linen-100 px-6 py-10 sm:px-10 md:px-12 md:py-12">
+      <div class="absolute right-0 top-0 h-full w-2 bg-evergreen-800"></div>
+      <div class="absolute -right-10 -top-10 h-32 w-32 rounded-full border border-berry-700/20"></div>
+      {% if value.eyebrow %}<p class="relative text-sm font-semibold uppercase tracking-[0.2em] text-berry-700">{{ value.eyebrow }}</p>{% endif %}
+      <h2 class="heading-lg relative mt-3 max-w-3xl">{{ value.heading }}</h2>
+      {% if value.intro %}<p class="relative mt-5 max-w-2xl text-lg leading-8 text-umber-700">{{ value.intro }}</p>{% endif %}
+      <ul class="relative mt-8 grid gap-x-10 gap-y-4 sm:grid-cols-2">
+        {% for item in value.items %}
+          <li class="flex items-start gap-3 border-t border-sand-200 pt-4 leading-7 text-umber-900">
+            <span class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-evergreen-800 text-linen-50">
+              <svg aria-hidden="true" class="h-3 w-3" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m3 8 3 3 7-7"/>
+              </svg>
+            </span>
+            <span>{{ item }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+      {% if value.priority_note %}
+        <p class="relative mt-8 border-l-4 border-berry-700 bg-linen-50 px-5 py-4 font-medium leading-7 text-umber-900">{{ value.priority_note }}</p>
+      {% endif %}
+    </div>
+  </div>
+</section>

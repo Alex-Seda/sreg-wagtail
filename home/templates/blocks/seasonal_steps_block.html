@@ -1,0 +1,18 @@
+<section class="py-16 md:py-24">
+  <div class="wrap">
+    <div class="max-w-3xl">
+      {% if value.eyebrow %}<p class="text-sm font-semibold uppercase tracking-[0.2em] text-berry-700">{{ value.eyebrow }}</p>{% endif %}
+      <h2 class="heading-lg mt-3">{{ value.heading }}</h2>
+      {% if value.intro %}<p class="mt-5 text-lg leading-8 text-umber-700">{{ value.intro }}</p>{% endif %}
+    </div>
+    <ol class="relative mt-10 max-w-3xl">
+      <span aria-hidden="true" class="absolute bottom-8 left-5 top-8 w-px bg-sand-200"></span>
+      {% for step in value.steps %}
+        <li class="relative flex gap-5 pb-8 last:pb-0 sm:gap-7">
+          <span class="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-berry-700 font-display text-2xl font-medium text-linen-50">{{ forloop.counter }}</span>
+          <div class="rich-text min-w-0 flex-1 border border-sand-200 bg-linen-100 px-5 py-5 leading-7 text-umber-700 [&_p+p]:mt-4">{{ step }}</div>
+        </li>
+      {% endfor %}
+    </ol>
+  </div>
+</section>

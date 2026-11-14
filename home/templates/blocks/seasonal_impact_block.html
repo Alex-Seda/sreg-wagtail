@@ -1,0 +1,31 @@
+<section class="py-20 md:py-28{% if value.background == 'sand' %} bg-linen-100{% endif %}">
+  <div class="wrap">
+    <div class="max-w-2xl">
+      {% if value.eyebrow %}<p class="text-sm font-semibold uppercase tracking-[0.2em] text-berry-700">{{ value.eyebrow }}</p>{% endif %}
+      <h2 class="heading-lg mt-3">{{ value.heading }}</h2>
+      {% if value.intro %}<p class="mt-5 text-lg leading-8 text-umber-700">{{ value.intro }}</p>{% endif %}
+    </div>
+
+    <ul class="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {% for item in value.items %}
+        <li class="relative overflow-hidden border border-sand-200 bg-linen-50 p-7 shadow-sm">
+          <div class="absolute -right-12 -top-12 h-28 w-28 rounded-full border border-berry-700/20"></div>
+          <div class="absolute left-0 top-0 h-1.5 w-full bg-evergreen-800"></div>
+          <div class="relative mb-7 flex items-center gap-3">
+            <span class="flex h-9 w-9 items-center justify-center rounded-full border border-berry-700/50 text-berry-700">
+              <svg aria-hidden="true" class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+                <path d="M12 20V5m0 0L8 9m4-4 4 4M6 20h12M8 16h8M5 20l3-4m11 4-3-4"/>
+              </svg>
+            </span>
+            <span class="h-px w-8 bg-sand-200"></span>
+          </div>
+          <h3 class="font-display text-3xl font-medium leading-tight">{{ item.title }}</h3>
+          <p class="mt-4 leading-7 text-umber-700">{{ item.description }}</p>
+          {% if item.link.label %}
+            <p class="mt-6">{% include "includes/button.html" with link=item.link variant="outline" %}</p>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
